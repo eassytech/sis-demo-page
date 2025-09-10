@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <style>
+    body {margin:0; font-family: Arial, sans-serif; background:#f4f4f4;}
+
+    /* Header */
+    header {
+      background:#333; color:#fff; padding:10px 20px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    }
+    header h2 {margin:0; font-size:20px;}
+    nav ul {list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap;}
+    nav li {margin:5px 10px;}
+    nav a {color:#fff; text-decoration:none; font-size:16px;}
+
+    /* Banner */
+    .slider {position:relative; width:100%; height:250px; overflow:hidden;}
+    .slides {display:flex; width:600%; animation:slide 12s infinite;}
+    .slides img {width:100%; height:250px; object-fit:cover;}
+    @keyframes slide {
+      0% {margin-left:0;}
+      16% {margin-left:0;}
+      20% {margin-left:-100%;}
+      36% {margin-left:-100%;}
+      40% {margin-left:-200%;}
+      56% {margin-left:-200%;}
+      60% {margin-left:-300%;}
+      76% {margin-left:-300%;}
+      80% {margin-left:-400%;}
+      96% {margin-left:-400%;}
+      100% {margin-left:-500%;}
+    }
+
+    /* Buttons */
+    .center-btn {text-align:center; margin:20px;}
+    .btn {
+      padding:10px 20px; background:#007bff; color:white; border:none; cursor:pointer;
+      border-radius:5px; font-size:16px; margin:5px;
+    }
+    .btn:hover {background:#0056b3;}
+    .reset-btn {background:#6c757d;}
+    .reset-btn:hover {background:#545b62;}
+
+    /* Form */
+    .form-container {
+      text-align:left; width:90%; max-width:450px; margin:20px auto;
+      padding:20px; border:1px solid #ccc; border-radius:8px; background:#fff;
+    }
+    .form-container input, .form-container textarea, .form-container select {
+      width:100%; padding:10px; margin:8px 0; border:1px solid #ccc; border-radius:4px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none; /* by default hidden */
+      position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.5); 
+      justify-content:center; align-items:center;
+    }
+    .modal-content {
+      background:#fff; padding:20px; border-radius:8px; width:90%; max-width:500px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3); text-align:center;
+    }
+
+    /* Green Receipt */
+    .receipt {
+      background:#e9f9ee;
+      border:2px solid #28a745;
+      border-radius:10px;
+      padding:20px;
+      margin-top:15px;
+      text-align:left;
+      font-size:15px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.2);
+    }
+    .receipt h3 {
+      margin:0 0 15px;
+      color:#28a745;
+      text-align:center;
+    }
+    .receipt table {
+      width:100%;
+      border-collapse:collapse;
+    }
+    .receipt table td {
+      padding:8px 5px;
+      border-bottom:1px solid #ccc;
+    }
+    .receipt table td:first-child {
+      font-weight:bold;
+      color:#333;
+      width:40%;
+    }
+    .status {
+      text-align:center;
+      margin-top:15px;
+      font-weight:bold;
+      color:#28a745;
+    }
+
+    /* Buttons inside modal */
+    .close-btn {
+      background:red; color:#fff; border:none; padding:5px 10px; float:right; cursor:pointer;
+      border-radius:5px;
+    }
+    .print-btn {
+      background:#28a745; color:#fff; padding:8px 15px; border:none; border-radius:5px; margin-top:10px;
+    }
+    .print-btn:hover {background:#1e7e34;}
+
+    /* Section */
+    section {padding:30px 20px;}
+    section h2 {margin-bottom:15px; text-align:center;}
+
+    /* Gallery */
+    .gallery {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:10px;
+    }
+    .gallery img {
+      width:100%; height:150px; object-fit:cover; border-radius:6px;
+      transition:transform 0.3s;
+    }
+    .gallery img:hover {transform:scale(1.05);}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h2>My Website</h2>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#form">Application Form</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Banner Slider -->
+  <div class="slider" id="home">
+    <div class="slides">
+      <img src="a.jpg" alt="">
+      <img src="b.jpg" alt="">
+      <img src="c.jpg" alt="">
+      <img src="d.jpg" alt="">
+      <img src="e.jpg" alt="">
+      <img src="f.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- Apply Now Button -->
+  <div class="center-btn">
+    <button class="btn" onclick="scrollToForm()">Apply Now</button>
+  </div>
+
+  <!-- Application Form -->
+  <div class="form-container" id="form">
+    <h3>Application Form</h3>
+    <form id="applicationForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="text" id="fname" placeholder="Father's Name" required>
+      <input type="text" id="aadhaar" placeholder="Aadhaar Number (12 digits)" pattern="\d{12}" maxlength="12" required>
+      <input type="text" id="prakhand" placeholder="Prakhand" required>
+      <input type="text" id="pincode" placeholder="Pin Code" pattern="\d{6}" maxlength="6" required>
+      <input type="text" id="state" placeholder="State" required>
+      <input type="text" id="mobile" placeholder="Mobile Number (+91)" pattern="[6-9]\d{9}" maxlength="10" required>
+
+      <button type="submit" class="btn">Submit</button>
+      <button type="reset" class="btn reset-btn">Reset</button>
+    </form>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content" id="receiptContent">
+      <button class="close-btn" onclick="closeModal()">X</button>
+      <h2>✅ Application Submitted Successfully</h2>
+      <div class="receipt" id="receipt">
+        <h3>Payment Receipt</h3>
+        <table>
+          <tr><td>Name</td><td><span id="rName"></span></td></tr>
+          <tr><td>Father's Name</td><td><span id="rFname"></span></td></tr>
+          <tr><td>Aadhaar No</td><td><span id="rAadhaar"></span></td></tr>
+          <tr><td>Prakhand</td><td><span id="rPrakhand"></span></td></tr>
+          <tr><td>Pin Code</td><td><span id="rPincode"></span></td></tr>
+          <tr><td>State</td><td><span id="rState"></span></td></tr>
+          <tr><td>Mobile No</td><td><span id="rMobile"></span></td></tr>
+          <tr><td>Unique ID</td><td><span id="rUnique"></span></td></tr>
+          <tr><td>Amount Paid</td><td>₹350</td></tr>
+          <tr><td>Payment Mode</td><td>By Cash</td></tr>
+        </table>
+        <div class="status">✔️ Payment Successful</div>
+      </div>
+      <button class="print-btn" onclick="printReceipt()">🖨️ Print Receipt</button>
+    </div>
+  </div>
+
+  <!-- About Us -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p style="text-align:center;">यहाँ आप अपनी संस्था/कंपनी के बारे में लिख सकते हैं।</p>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="1.jpg" alt="">
+      <img src="2.jpg" alt="">
+      <img src="3.jpg" alt="">
+      <img src="4.jpg" alt="">
+      <img src="5.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#333; color:white; text-align:center; padding:20px; margin-top:30px;">
+    <p>&copy; 2025 My Website. All Rights Reserved.</p>
+    <p>Email: support@mywebsite.com | Phone: +91-9876543210</p>
+  </footer>
+
+  <script>
+    function scrollToForm(){
+      document.getElementById("form").scrollIntoView({behavior:"smooth"});
+    }
+
+    document.getElementById("applicationForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let fname = document.getElementById("fname").value;
+      let aadhaar = document.getElementById("aadhaar").value;
+      let prakhand = document.getElementById("prakhand").value;
+      let pincode = document.getElementById("pincode").value;
+      let state = document.getElementById("state").value;
+      let mobile = document.getElementById("mobile").value;
+
+      let uniqueId = "ID-" + Math.random().toString(36).substr(2,9);
+
+      document.getElementById("rName").innerText = name;
+      document.getElementById("rFname").innerText = fname;
+      document.getElementById("rAadhaar").innerText = aadhaar;
+      document.getElementById("rPrakhand").innerText = prakhand;
+      document.getElementById("rPincode").innerText = pincode;
+      document.getElementById("rState").innerText = state;
+      document.getElementById("rMobile").innerText = mobile;
+      document.getElementById("rUnique").innerText = uniqueId;
+
+      document.getElementById("successModal").style.display = "flex";
+      this.reset();
+    });
+
+    function closeModal(){
+      document.getElementById("successModal").style.display = "none";
+    }
+
+    function printReceipt(){
+      let receiptContent = document.getElementById("receipt").innerHTML;
+      let w = window.open('', '', 'width=600,height=400');
+      w.document.write('<html><head><title>Receipt</title></head><body>');
+      w.document.write('<h2 style="text-align:center; color:#28a745;">Application Receipt</h2>');
+      w.document.write(receiptContent);
+      w.document.write('</body></html>');
+      w.document.close();
+      w.print();
+    }
+  </script>
+</body>
+</html>
